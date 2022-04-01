@@ -1,4 +1,4 @@
-import { serverError } from "../../../presentation/helpers/http/http-helper";
+import { ok, serverError } from "../../../presentation/helpers/http/http-helper";
 import { ReadEntity } from "../../../domain/usecases/get-all-entity";
 import { Controller, HttpResponse } from "./entity-controller-protocols";
 
@@ -11,10 +11,7 @@ export class EntityController implements Controller {
         try {
             const allEntities = await this.readEntity.getAll()
 
-            return {
-                statusCode: 200,
-                body: allEntities
-            }
+            return ok(allEntities)
         } catch (error) {
             return serverError(error)
         }
