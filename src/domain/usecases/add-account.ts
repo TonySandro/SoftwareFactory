@@ -2,6 +2,7 @@ import { AccountModel } from "../models/account";
 
 export interface AddAccountModel {
     name: string
+    cpf: string
     email: string
     password: string
 }

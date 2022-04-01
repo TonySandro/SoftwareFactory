@@ -26,6 +26,7 @@ describe("Login Routes", () => {
                 .post("/api/signup")
                 .send({
                     name: "Tony",
+                    cpf: "00730712332",
                     email: "tony@email.com",
                     password: "123",
                     passwordConfirmation: "123",

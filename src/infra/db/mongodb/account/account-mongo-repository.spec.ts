@@ -26,6 +26,7 @@ describe('Account Mongo Repository', () => {
         const sut = makeSut()
         const account = await sut.add({
             name: 'any_name',
+            cpf: 'valid_cpf',
             email: 'any_email@email.com',
             password: 'any_password',
         })
