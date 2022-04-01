@@ -1,5 +1,5 @@
-import { InvalidParamError, MissingParamError } from "../../errors"
-import { anauthorized, badRequest, ok, serverError } from "../../helpers/http/http-helper"
+import { MissingParamError } from "../../errors"
+import { anauthorized, badRequest, success, serverError } from "../../helpers/http/http-helper"
 import { Validation, HttpRequest, Authentication, AuthenticationModel } from "./login-controller-protocols"
 import { LoginController } from "./login-controller"
 
@@ -77,7 +77,7 @@ describe('Login Controller', () => {
         const { sut } = makeSut()
         const httpResponse = await sut.handle(makeFakeRequest())
 
-        expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
+        expect(httpResponse).toEqual(success({ accessToken: 'any_token' }))
     })
 
     test('Should call Validation with correct value', async () => {

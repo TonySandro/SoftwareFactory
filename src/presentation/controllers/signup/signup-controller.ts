@@ -1,5 +1,5 @@
 import { HttpRequest, HttpResponse, Controller, AddAccount, Validation } from "./signup-controller-protocols"
-import { badRequest, ok, serverError } from "../../helpers/http/http-helper"
+import { badRequest, success, serverError } from "../../helpers/http/http-helper"
 
 export class SignUpController implements Controller {
     constructor(
@@ -25,7 +25,7 @@ export class SignUpController implements Controller {
                 password
             })
 
-            return ok(account)
+            return success(account)
         } catch (error) {
             return serverError(error)
         }

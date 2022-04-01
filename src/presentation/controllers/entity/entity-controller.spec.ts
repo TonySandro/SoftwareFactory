@@ -1,5 +1,5 @@
 import { ServerError } from "../../../presentation/errors"
-import { ok, serverError } from "../../../presentation/helpers/http/http-helper"
+import { success, serverError } from "../../../presentation/helpers/http/http-helper"
 import { EntityModel } from "../../../domain/models/entity"
 import { ReadEntity } from "../../../domain/usecases/get-all-entity"
 import { EntityController } from "./entity-controller"
@@ -63,7 +63,7 @@ describe('Entity Controller', () => {
 
         const httpResponse = await sut.handle({})
         expect(httpResponse.statusCode).toBe(200)
-        expect(httpResponse).toEqual(ok(makeFakeResponse()))
+        expect(httpResponse).toEqual(success(makeFakeResponse()))
     })
 
 })
