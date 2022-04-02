@@ -1,5 +1,5 @@
 import { EntityModel } from "domain/models/entity";
 
 export interface ReadEntity {
-    getAll(): Promise<EntityModel>
+    getAll(): Promise<EntityModel[]>
 }

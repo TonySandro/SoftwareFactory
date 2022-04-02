@@ -6,8 +6,8 @@ import { EntityController } from "./entity-controller"
 
 const makeReadEntity = (): ReadEntity => {
     class ReadEntityStub implements ReadEntity {
-        async getAll(): Promise<EntityModel> {
-            return new Promise(resolve => resolve(makeFakeResponse()))
+        async getAll(): Promise<EntityModel[]> {
+            return new Promise(resolve => resolve([makeFakeResponse()]))
         }
     }
     return new ReadEntityStub()
