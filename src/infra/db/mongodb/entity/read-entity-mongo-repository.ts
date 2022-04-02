@@ -5,9 +5,8 @@ import { MongoHelper } from "../helpers/mongo-helper";
 export class ReadEntityMongoRepository implements ReadEntityRepository {
     async getAll(): Promise<EntityModel[]> {
         try {
-            const collection = await MongoHelper.getCollection('entity')
+            const collection = await MongoHelper.getCollection('entitys')
             const entities: any[] = await collection.find({}).toArray()
-            console.log(entities)
             return entities
         } catch (error) {
             return error

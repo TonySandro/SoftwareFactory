@@ -1,4 +1,3 @@
-import { hash } from "bcrypt";
 import { Collection } from "mongodb";
 import request from "supertest";
 import { MongoHelper } from "../../infra/db/mongodb/helpers/mongo-helper";
@@ -16,7 +15,7 @@ describe("Login Routes", () => {
     });
 
     beforeEach(async () => {
-        accountCollection = await MongoHelper.getCollection("accounts");
+        accountCollection = await MongoHelper.getCollection("entitys");
         await accountCollection.deleteMany({});
     });
 

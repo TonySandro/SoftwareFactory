@@ -23,7 +23,7 @@ describe('Read Entity Mongo Repository', () => {
     })
 
     beforeEach(async () => {
-        const transactionCollection = MongoHelper.getCollection('entity')
+        const transactionCollection = MongoHelper.getCollection('entitys')
         await (await transactionCollection).deleteMany({})
     })
 
