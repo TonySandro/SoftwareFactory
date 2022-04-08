@@ -1,4 +1,4 @@
-import { MongoHelper } from "../helpers/mongo-helper"
+import { MongoHelper } from "../../helpers/mongo-helper"
 import { ReadEntityMongoRepository } from "./read-entity-mongo-repository"
 
 interface SutTypes {
