@@ -1,12 +1,12 @@
 import { MongoHelper } from "../../helpers/mongo-helper"
-import { ReadEntityMongoRepository } from "./read-entity-mongo-repository"
+import { ReadAllEntityMongoRepository } from "./read-all-entity-mongo-repository"
 
 interface SutTypes {
-    sut: ReadEntityMongoRepository
+    sut: ReadAllEntityMongoRepository
 }
 
 const makeSut = (): SutTypes => {
-    const sut = new ReadEntityMongoRepository()
+    const sut = new ReadAllEntityMongoRepository()
     return {
         sut
     }

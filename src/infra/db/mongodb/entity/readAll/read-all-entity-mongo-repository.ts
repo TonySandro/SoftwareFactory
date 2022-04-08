@@ -2,7 +2,7 @@ import { ReadEntityRepository } from "data/protocols/db/entity/read-entity-repos
 import { EntityModel } from "domain/models/entity";
 import { MongoHelper } from "../../helpers/mongo-helper";
 
-export class ReadEntityMongoRepository implements ReadEntityRepository {
+export class ReadAllEntityMongoRepository implements ReadEntityRepository {
     async getAll(): Promise<EntityModel[]> {
         try {
             const collection = await MongoHelper.getCollection('entitys')
