@@ -1,8 +1,8 @@
-import { ServerError } from "../../../presentation/errors"
-import { success, serverError } from "../../../presentation/helpers/http/http-helper"
+import { ServerError } from "../../errors"
+import { success, serverError } from "../../helpers/http/http-helper"
 import { EntityModel } from "../../../domain/models/entity"
 import { ReadEntity } from "../../../domain/usecases/get-all-entity"
-import { EntityController } from "./entity-controller"
+import { GetAllEntityController } from "./entity-controller"
 
 const makeReadEntity = (): ReadEntity => {
     class ReadEntityStub implements ReadEntity {
@@ -36,7 +36,7 @@ const makeFakeResponse = (): EntityModel => ({
 
 const makeSut = (): any => {
     const readEntity = makeReadEntity()
-    const sut = new EntityController(readEntity)
+    const sut = new GetAllEntityController(readEntity)
     return {
         sut,
         readEntity
