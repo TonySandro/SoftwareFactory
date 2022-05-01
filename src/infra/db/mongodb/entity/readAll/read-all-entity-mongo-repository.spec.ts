@@ -29,17 +29,17 @@ describe('Read Entity Mongo Repository', () => {
 
     test('Should  return an read entities values', async () => {
         const { sut } = makeSut()
-        jest.spyOn(sut, "getAll")
+        jest.spyOn(sut, "getEntity")
 
-        const promise = sut.getAll()
+        const promise = sut.getEntity()
         await expect(promise).toBeTruthy()
     })
 
-    test('Should return throw getAll if throws', async () => {
+    test('Should return throw getEntity if throws', async () => {
         const { sut } = makeSut()
-        jest.spyOn(sut, "getAll")
+        jest.spyOn(sut, "getEntity")
             .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
-        const promise = sut.getAll()
+        const promise = sut.getEntity()
 
         await expect(promise).rejects.toThrow()
     })

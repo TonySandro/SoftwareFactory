@@ -6,7 +6,7 @@ import { MissingParamError, ServerError } from "../../errors"
 
 const makeReadEntity = (): ReadEntity => {
     class ReadEntityStub implements ReadEntity {
-        async getAll(): Promise<EntityModel[]> {
+        async getEntity(): Promise<EntityModel[]> {
             return new Promise(resolve => resolve(makeFakeResponse()))
         }
     }
@@ -57,7 +57,7 @@ describe('Search Entity Controller', () => {
 
     test('Should return 500 if readEntity throws', async () => {
         const { sut, readEntity } = makeSut()
-        jest.spyOn(readEntity, 'getAll').mockImplementationOnce(async () => {
+        jest.spyOn(readEntity, 'getEntity').mockImplementationOnce(async () => {
             return new Promise((resolve, reject) => reject(new Error()))
         })
         const httpResponse = await sut.handle(makeFakeRequest())

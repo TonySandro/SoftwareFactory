@@ -9,7 +9,7 @@ export class GetAllEntityController implements Controller {
 
     async handle(): Promise<HttpResponse> {
         try {
-            const allEntities = await this.readEntity.getAll()
+            const allEntities = await this.readEntity.getEntity()
 
             return success(allEntities)
         } catch (error) {

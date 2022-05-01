@@ -6,7 +6,7 @@ import { GetAllEntityController } from "./entity-controller"
 
 const makeReadEntity = (): ReadEntity => {
     class ReadEntityStub implements ReadEntity {
-        async getAll(): Promise<EntityModel[]> {
+        async getEntity(): Promise<EntityModel[]> {
             return new Promise(resolve => resolve([makeFakeResponse()]))
         }
     }
@@ -46,7 +46,7 @@ const makeSut = (): any => {
 describe('Entity Controller', () => {
     test('Should return 500 if readEntity throws', async () => {
         const { sut, readEntity } = makeSut()
-        jest.spyOn(readEntity, 'getAll').mockImplementationOnce(async () => {
+        jest.spyOn(readEntity, 'getEntity').mockImplementationOnce(async () => {
             return new Promise((resolve, reject) => reject(new Error()))
         })
 
@@ -57,7 +57,7 @@ describe('Entity Controller', () => {
 
     test('Should call readEntity returns correct values', async () => {
         const { sut, readEntity } = makeSut()
-        jest.spyOn(readEntity, 'getAll').mockReturnValueOnce(
+        jest.spyOn(readEntity, 'getEntity').mockReturnValueOnce(
             new Promise(resolve => resolve(makeFakeResponse()))
         )
 
