@@ -52,7 +52,15 @@ describe('Search Entity Controller', () => {
         const { sut } = makeSut()
 
         const httpResponse = await sut.handle(makeFakeRequest())
-        expect(httpResponse).toEqual(success([]))
+        expect(httpResponse.statusCode).toBe(200)
+    })
+
+    test('Should call with correct valid data', async () => {
+        const { sut, readEntity } = makeSut()
+        const readEntitySpy = jest.spyOn(readEntity, "getEntity")
+
+        await sut.handle(makeFakeRequest())
+        expect(readEntitySpy).toHaveBeenCalledWith(makeFakeRequest().body.entityName)
     })
 
     test('Should return 500 if readEntity throws', async () => {
