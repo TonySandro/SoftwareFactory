@@ -15,9 +15,9 @@ export class SearchEntityController implements Controller {
                 return badRequest(new MissingParamError("entityName"))
             }
 
-            await this.readEntity.getEntity()
+            const entity = await this.readEntity.getEntity(entityName)
 
-            return success([])
+            return success(entity)
         } catch (error) {
             return serverError(error)
         }
