@@ -2,7 +2,7 @@ import { serverError, success } from "../../helpers/http/http-helper"
 import { EntityModel } from "../../../domain/models/entity"
 import { SearchEntityController } from "./search-entity-controller"
 import { ReadEntity } from "../../../domain/usecases/get-all-entity"
-import { ServerError } from "../../errors"
+import { MissingParamError, ServerError } from "../../errors"
 
 const makeReadEntity = (): ReadEntity => {
     class ReadEntityStub implements ReadEntity {
@@ -14,7 +14,7 @@ const makeReadEntity = (): ReadEntity => {
 }
 
 const makeFakeRequest = () => ({
-    body: 'any_entity'
+    body: { entityName: 'any_entity' }
 })
 
 const makeFakeResponse = (): EntityModel[] => ([{
@@ -62,5 +62,18 @@ describe('Search Entity Controller', () => {
         })
         const httpResponse = await sut.handle(makeFakeRequest())
         expect(httpResponse).toEqual(serverError(new ServerError(null)))
+    })
+
+    test('Should return 400 if no entityName is provided', async () => {
+        const { sut } = makeSut()
+        const httpRequest = {
+            body: {
+                // entityName: "valid_entityName",
+            }
+        }
+
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse.statusCode).toBe(400)
+        expect(httpResponse.body).toEqual(new MissingParamError('entityName'))
     })
 })
