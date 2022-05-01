@@ -6,7 +6,7 @@ export class ReadByNameEntityMongoRepository implements ReadEntityRepository {
     async getEntity(entityName?: string): Promise<EntityModel[]> {
         try {
             const collection = await MongoHelper.getCollection('entitys')
-            const entities: any[] = await collection.find({ name: entityName }).toArray()
+            const entities: any[] = await collection.find({ name: { $regex: entityName } }).toArray()
             return entities
         } catch (error) {
             return error
