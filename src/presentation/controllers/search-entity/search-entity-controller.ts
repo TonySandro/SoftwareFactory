@@ -1,8 +1,6 @@
 import { MissingParamError } from '../../../presentation/errors'
-import { ReadEntity } from '../../../domain/usecases/get-all-entity'
 import { badRequest, serverError, success } from '../../../presentation/helpers/http/http-helper'
-import { HttpRequest, HttpResponse } from '../get-all-entity/entity-controller-protocols'
-import { Controller } from './search-entity-controller-protocols'
+import { HttpRequest, HttpResponse, Controller, ReadEntity } from '../controller-protocols'
 
 export class SearchEntityController implements Controller {
     constructor(private readonly readEntity: ReadEntity) { }

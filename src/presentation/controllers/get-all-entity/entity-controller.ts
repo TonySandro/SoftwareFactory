@@ -1,6 +1,5 @@
 import { success, serverError } from "../../helpers/http/http-helper";
-import { ReadEntity } from "../../../domain/usecases/get-all-entity";
-import { Controller, HttpResponse } from "./entity-controller-protocols";
+import { Controller, HttpResponse, ReadEntity } from "../controller-protocols";
 
 export class GetAllEntityController implements Controller {
     constructor(private readonly readEntity: ReadEntity) {

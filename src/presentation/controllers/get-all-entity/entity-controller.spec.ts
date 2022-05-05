@@ -1,7 +1,6 @@
 import { ServerError } from "../../errors"
 import { success, serverError } from "../../helpers/http/http-helper"
-import { EntityModel } from "../../../domain/models/entity"
-import { ReadEntity } from "../../../domain/usecases/get-all-entity"
+import { ReadEntity, EntityModel } from "../controller-protocols"
 import { GetAllEntityController } from "./entity-controller"
 
 const makeReadEntity = (): ReadEntity => {

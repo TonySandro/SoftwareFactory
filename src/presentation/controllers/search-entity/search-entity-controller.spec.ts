@@ -1,8 +1,7 @@
-import { serverError, success } from "../../helpers/http/http-helper"
-import { EntityModel } from "../../../domain/models/entity"
+import { serverError } from "../../helpers/http/http-helper"
 import { SearchEntityController } from "./search-entity-controller"
-import { ReadEntity } from "../../../domain/usecases/get-all-entity"
 import { MissingParamError, ServerError } from "../../errors"
+import { EntityModel, ReadEntity } from "../controller-protocols"
 
 const makeReadEntity = (): ReadEntity => {
     class ReadEntityStub implements ReadEntity {
