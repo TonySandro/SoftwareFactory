@@ -1,8 +1,17 @@
+import { MissingParamError } from "../../errors"
 import { AddRatingController } from "./add-rating-controller"
 
 
 const makeFakeRequest = () => ({
-    body: {}
+    body: {
+        assessments:
+        {
+            indicate: 5,
+            goBack: 5,
+            satisfaction: 5
+        }
+
+    }
 })
 
 const makeSut = () => {
@@ -19,4 +28,24 @@ describe('Add Rating Controller', () => {
         const httpResponse = await sut.handle(makeFakeRequest())
         expect(httpResponse.statusCode).toBe(200)
     })
+
+    test('Should return 400 if no indicate is provided', async () => {
+        const { sut } = makeSut()
+        const httpRequest = {
+            body: {
+                assessments:
+                {
+                    // indicate: 5,
+                    goBack: 5,
+                    satisfaction: 5
+                }
+
+            }
+        }
+
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse.statusCode).toBe(400)
+        expect(httpResponse.body).toEqual(new MissingParamError('indicate'))
+    })
+
 })
