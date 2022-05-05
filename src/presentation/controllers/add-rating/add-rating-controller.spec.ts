@@ -48,4 +48,22 @@ describe('Add Rating Controller', () => {
         expect(httpResponse.body).toEqual(new MissingParamError('indicate'))
     })
 
+    test('Should return 400 if goBack is not provided', async () => {
+        const { sut } = makeSut()
+        const httpRequest = {
+            body: {
+                assessments:
+                {
+                    indicate: 5,
+                    // goBack: 5,
+                    satisfaction: 5
+                }
+
+            }
+        }
+
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse.statusCode).toBe(400)
+        expect(httpResponse.body).toEqual(new MissingParamError('goBack'))
+    })
 })
