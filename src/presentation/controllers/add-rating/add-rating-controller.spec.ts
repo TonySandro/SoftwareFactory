@@ -1,6 +1,18 @@
+import { serverError } from './../../helpers/http/http-helper';
+import { AddRating } from './../../../domain/usecases/add-rating';
 import { MissingParamError } from "../../errors"
 import { AddRatingController } from "./add-rating-controller"
+import { RatingModel } from 'domain/models/rating';
 
+const makeAddRating = (): AddRating => {
+    class AddRatingStub implements AddRating {
+        async add(rating: RatingModel): Promise<RatingModel> {
+            return new Promise(resolve => resolve(makeFakeResponse()))
+
+        }
+    }
+    return new AddRatingStub()
+}
 
 const makeFakeRequest = () => ({
     body: {
@@ -14,10 +26,18 @@ const makeFakeRequest = () => ({
     }
 })
 
+const makeFakeResponse = () => ({
+    indicate: 5,
+    goBack: 5,
+    satisfaction: 5
+})
+
 const makeSut = () => {
-    const sut = new AddRatingController()
+    const addRating = makeAddRating()
+    const sut = new AddRatingController(addRating)
     return {
-        sut
+        sut,
+        addRating
     }
 }
 
@@ -84,5 +104,16 @@ describe('Add Rating Controller', () => {
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse.statusCode).toBe(400)
         expect(httpResponse.body).toEqual(new MissingParamError('satisfaction'))
+    })
+
+    test('Should return 500 if addRating throws', async () => {
+        const { sut, addRating } = makeSut()
+        jest.spyOn(addRating, 'add').mockImplementationOnce(async () => {
+            return new Promise((resolve, reject) => reject(new Error()))
+        })
+
+        const httpResponse = await sut.handle({})
+        expect(httpResponse.statusCode).toBe(500)
+        expect(httpResponse).toEqual(serverError(new Error()))
     })
 })
