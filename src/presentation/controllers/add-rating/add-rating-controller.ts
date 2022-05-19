@@ -23,7 +23,7 @@ export class AddRatingController implements Controller {
             return badRequest(new MissingParamError("entity name"))
         }
 
-        this.addRating.add(assessments)
+        this.addRating.add({ assessments, ...entityName } )
 
         return success(assessments)
         } catch (error) {
