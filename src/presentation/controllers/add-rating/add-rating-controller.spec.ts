@@ -28,6 +28,7 @@ const makeFakeRequest = () => ({
 })
 
 const makeFakeResponse = () => ({
+    entityName: "any_entity",
     indicate: 5,
     goBack: 5,
     satisfaction: 5
