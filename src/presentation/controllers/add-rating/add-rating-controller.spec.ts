@@ -16,6 +16,7 @@ const makeAddRating = (): AddRating => {
 
 const makeFakeRequest = () => ({
     body: {
+        entityName: 'any_entity',
         assessments:
         {
             indicate: 5,
@@ -53,6 +54,7 @@ describe('Add Rating Controller', () => {
         const { sut } = makeSut()
         const httpRequest = {
             body: {
+                entityName: 'any_entity',
                 assessments:
                 {
                     // indicate: 5,
@@ -72,6 +74,7 @@ describe('Add Rating Controller', () => {
         const { sut } = makeSut()
         const httpRequest = {
             body: {
+                entityName: 'any_entity',
                 assessments:
                 {
                     indicate: 5,
@@ -91,6 +94,7 @@ describe('Add Rating Controller', () => {
         const { sut } = makeSut()
         const httpRequest = {
             body: {
+                entityName: 'any_entity',
                 assessments:
                 {
                     indicate: 5,
@@ -104,6 +108,26 @@ describe('Add Rating Controller', () => {
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse.statusCode).toBe(400)
         expect(httpResponse.body).toEqual(new MissingParamError('satisfaction'))
+    })
+
+    test('Should return 400 if entityName is not provided', async () => {
+        const { sut } = makeSut()
+        const httpRequest = {
+            body: {
+                // entityName: 'any_entity',
+                assessments:
+                {
+                    indicate: 5,
+                    goBack: 5,
+                    satisfaction: 5
+                }
+
+            }
+        }
+
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse.statusCode).toBe(400)
+        expect(httpResponse.body).toEqual(new MissingParamError('entity name'))
     })
 
     test('Should return 500 if addRating throws', async () => {
