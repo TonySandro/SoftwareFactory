@@ -51,6 +51,31 @@ describe('Add Rating Controller', () => {
         expect(httpResponse.statusCode).toBe(200)
     })
 
+    test('Should return 200 if valid data is provided with commentary', async () => {
+        const { sut } = makeSut()
+
+        const httpRequest = ({
+            body: {
+                entityName: 'any_entity',
+
+                assessments: {
+                    indicate: 5,
+                    goBack: 5,
+                    satisfaction: 5
+                },
+
+                commentary: {
+                    autor: 'Tony',
+                    message: 'Mensagem',
+                    star: 5,
+                }
+            }
+        })
+
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse.statusCode).toBe(200)
+    })
+
     test('Should return 400 if no indicate is provided', async () => {
         const { sut } = makeSut()
         const httpRequest = {
