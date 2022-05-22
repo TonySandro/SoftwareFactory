@@ -11,7 +11,7 @@ export class AddRatingController implements Controller {
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-              const { assessments, entityName } = httpRequest.body
+              const { assessments, entityName, commentary } = httpRequest.body
         const requiredField = ["indicate", "goBack", "satisfaction"]
 
         for (const field of requiredField) {
@@ -23,9 +23,11 @@ export class AddRatingController implements Controller {
             return badRequest(new MissingParamError("entity name"))
         }
 
-        this.addRating.add({ assessments, ...entityName } )
+        const fullRanting = { entityName, ...assessments, ...commentary }
+        this.addRating.add(fullRanting)
+        
 
-        return success(assessments)
+        return success(fullRanting)
         } catch (error) {
             return serverError(error)
         }
