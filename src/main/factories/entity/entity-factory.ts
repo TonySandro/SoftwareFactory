@@ -3,7 +3,7 @@ import { DbReadAllEntity } from "../../../data/usecases/read-all-entity/db-read-
 import { GetAllEntityController } from "../../../presentation/controllers/get-all-entity/entity-controller";
 
 export const makeGetAllEntityController = (): GetAllEntityController => {
-    const dbEntituMongoRepository = new ReadAllEntityMongoRepository()
-    const dbReadAllEntity = new DbReadAllEntity(dbEntituMongoRepository)
+    const dbEntityMongoRepository = new ReadAllEntityMongoRepository()
+    const dbReadAllEntity = new DbReadAllEntity(dbEntityMongoRepository)
     return new GetAllEntityController(dbReadAllEntity)
 }
