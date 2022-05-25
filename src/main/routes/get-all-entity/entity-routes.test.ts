@@ -5,7 +5,7 @@ import app from "../../config/app";
 
 let accountCollection: Collection
 
-describe("Login Routes", () => {
+describe("Get all Entitys Routes", () => {
     beforeAll(async () => {
         await MongoHelper.connect(process.env.MONGO_URL as string);
     });
