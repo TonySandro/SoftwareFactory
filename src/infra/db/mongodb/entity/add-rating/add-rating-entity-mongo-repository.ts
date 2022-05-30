@@ -3,14 +3,25 @@ import { AddRatingRepository } from '../../../../../data/protocols/db/account/ad
 import { MongoHelper } from "../../helpers/mongo-helper";
 
 export class AddRatingEntityMongoRepository implements AddRatingRepository {
-    async add(rating: RatingModel): Promise<RatingModel> {
+    async add(rating: any): Promise<RatingModel> {
         const collection = await MongoHelper.getCollection('entitys')
-        const entities = await collection.find({}).toArray()
-        console.log(rating.entityName, entities)
+        const entityStub = await collection.findOne({ name: rating.entityName })
 
-        // const result = await collection.insertOne(rating)
-        // const accountData = await collection.findOne(result.insertedId)
-        // return MongoHelper.map(accountData);
-        return null
+        const updateEntity = {
+            comentary: [rating.commentary, ...entityStub.comments],
+            assessments: [rating.assessments, ...entityStub.assessments]
+        }
+
+        const entity = await collection.findOneAndUpdate(
+            { name: rating.entityName },
+            {
+                $set: {
+                    comments: updateEntity.comentary,
+                    assessments: updateEntity.assessments
+                }
+            }
+        )
+
+        return MongoHelper.map(entity);
     }
 }

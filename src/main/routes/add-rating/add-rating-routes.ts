@@ -3,5 +3,5 @@ import { Router } from "express";
 import { adaptRoute } from "../../adapters/express/express-routes-adapter";
 
 export default (router: Router): void => {
-    router.get('/add-rating', adaptRoute(makeAddRatingController()))
+    router.post('/add-rating', adaptRoute(makeAddRatingController()))
 }
